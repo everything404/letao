@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>乐淘</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="assets/mui/css/mui.css">
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/category.css">
+	<link rel="stylesheet" href="assets/fontAwesome/css/font-awesome.min.css">
+	<script src="assets/zepto/zepto.min.js"></script>
+	<script src="assets/artTemplate/template-native.js"></script>
+	<script src="assets/mui/js/mui.js"></script>
+	<script src="js/category.js"></script>
+</head>
+<body>
+	<header class="lt-header mui-bar mui-bar-nav">
+			<h1 class="mui-title">乐淘</h1>
+			<a href="search.html" class="mui-icon mui-icon-search mui-pull-right"></a>
+	</header>
+  <nav class="mui-bar mui-bar-tab lt-footer">
+			<a class="mui-tab-item" href="index.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="category.html">
+				<span class="mui-icon mui-icon mui-icon-bars"></span>
+				<span class="mui-tab-label">分类</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-contact">
+				<span class="mui-icon fa fa-shopping-cart"></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-map">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">会员中心</span>
+			</a>
+	</nav>
+	<di class="lt-content">
+	   <di class="category-left">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="links-wrapper" id="links-wrapper">
+					</ul>
+				</div>
+			</div>
+	   </di>
+	   <div class="category-right">
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="brand-list" id="brand-list">	
+					</ul>
+				</div>
+			</div>
+	   </div>
+	</di>
+	<script id="cate-left" type="text/html">
+		<% for(let i = 0; i < data.length; i++) { %>
+			<li class="link" data-id="<%= data[i].id %>"><a href="#"><%= data[i].categoryName %></a></li>
+		<% } %>
+	</script>
+	<script id="cate-right" type="text/html">
+	 <% for(let i = 0; i < data.length; i++) { %>
+		<li class="brand">
+			<a href="">
+				<img src="<%= data[i].brandLogo%>" alt="">
+				<p><%= data[i].brandName %></p>
+		  </a>
+		</li>
+  <% } %>
+
+  <% if(!data.length) { %>
+    <li class="nodata">暂无数据</li>
+  <% } %>
+	</script>
+
+	<script>
+		mui('body').on('tap','a',function(){
+          window.top.location.href=this.href;
+   })
+	</script>
+</body>
+</html>

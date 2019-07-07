@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>乐淘</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="assets/mui/css/mui.css">
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="css/search-result.css">
+	<link rel="stylesheet" href="assets/fontAwesome/css/font-awesome.min.css">
+	<script src="assets/mui/js/mui.js"></script>
+</head>
+<body>
+	<header class="lt-header mui-bar mui-bar-nav">
+	  <h1 class="mui-title">搜索结果</h1>
+	</header>
+  <nav class="mui-bar mui-bar-tab lt-footer">
+			<a class="mui-tab-item" href="index.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="category.html">
+				<span class="mui-icon mui-icon mui-icon-bars"></span>
+				<span class="mui-tab-label">分类</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-contact">
+				<span class="mui-icon fa fa-shopping-cart"></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-map">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">会员中心</span>
+			</a>
+	</nav>
+	<div class="mui-content">
+		<div class="mui-row lt-filter">
+        <div class="mui-col-xs-6 lt-xs-6 lt-left">
+           <span>价格</span>
+           <span class="mui-icon mui-icon-arrowdown lt-icon-down"></span>
+        </div>
+        <div class="mui-col-xs-6 lt-xs-6 lt-right">
+           <span>销量</span>
+           <span class="mui-icon mui-icon-arrowdown lt-icon-down"></span>
+        </div>
+    </div>
+		<div class="products-wrapper">
+		    <ul class="products-content">
+	        <li class="product-item">
+	          <a href="" class="link">
+	            <img src="images/product.jpg" alt="">
+	             <span class="title">
+	            运动男鞋不用钱 男款x112233 行过路过，千万不要错过
+	            </span>
+	            <p class="price-wrapper">
+	              <span class="now-price">￥5600元</span>
+	              <span class="old-price"><del>￥6000元</del></span>
+	            </p>
+	            <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
+	          </a>
+	        </li>
+	        <li class="product-item">
+	          <a href="" class="link">
+	            <img src="images/product.jpg" alt="">
+	             <span class="title">
+	            运动男鞋不用钱 男款x112233 行过路过，千万不要错过
+	            </span>
+	            <p class="price-wrapper">
+	              <span class="now-price">￥560元</span>
+	              <span class="old-price"> <del>￥600元</del></span>
+	            </p> 
+	            <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
+	          </a>
+	        </li>
+	        <li class="product-item">
+	          <a href="" class="link">
+	            <img src="images/product.jpg" alt="">
+	             <span class="title">
+	            运动男鞋不用钱 男款x112233 行过路过，千万不要错过
+	            </span>
+	            <p class="price-wrapper">
+	              <span class="now-price">￥560元</span>
+	              <span class="old-price"> <del>￥600元</del></span>
+	            </p> 
+	            <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
+	          </a>
+	        </li>
+	        <li class="product-item">
+	          <a href="" class="link">
+	            <img src="images/product.jpg" alt="">
+	             <span class="title">
+	            运动男鞋不用钱 男款x112233 行过路过，千万不要错过
+	            </span>
+	            <p class="price-wrapper">
+	              <span class="now-price">￥560元</span>
+	              <span class="old-price"> <del>￥600元</del></span>
+	            </p> 
+	            <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
+	          </a>
+	        </li>
+	      </ul>
+	  </div>
+	</div>
+	<script>
+	 mui('body').on('tap','a',function(){
+     window.top.location.href=this.href;
+   })
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+首页样式*/
+/*轮播图*/
+/*导航链接*/
+.nav-links {
+	padding: 10px;
+}
+.nav-links .link {
+	width: 33.333%;
+	float: left;
+}
+.nav-links .link img {
+	width: 100%;
+	vertical-align: top;
+}
+/*品牌专区*/
+.brand-wrapper {
+	padding: 0 10px;
+}
+.brand-wrapper .title {
+	width: 100%;
+}
+.brand-wrapper .brands {
+ overflow: hidden;
+ margin: 0;
+ padding: 10px 0;
+}
+.brand-wrapper .brands .brand-item {
+	width: 25%;
+	float: left;
+}
+.brands .brand-item a {
+  display: block;
+}
+.brands .brand-item a img{
+	width: 100%;
+}
+
+/*运动生活专区*/
+/*样式在base.css中*/

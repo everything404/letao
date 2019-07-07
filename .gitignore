@@ -1,0 +1,19 @@
+.DS_Store
+node_modules
+/public/back
+/public/mobile
+/public/manage
+/public/upload
+
+/node_modules/
+/public/back/
+/public/mobile/
+/public/manage/
+/public/upload/
+
+ .idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

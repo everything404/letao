@@ -1,0 +1,22 @@
+/*搜索结果样式*/
+.lt-filter {
+	padding: 5px 10px;
+	margin-top: 10px;
+}
+.lt-filter .lt-left {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.lt-filter .lt-right {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.lt-filter .lt-xs-6 {
+	line-height: 35px;
+	text-align: center;
+	font-size: 14px;
+	background-color: #efeff4;
+}
+.lt-xs-6 .lt-icon-down {
+	font-size: 14px;
+}

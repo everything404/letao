@@ -1,0 +1,63 @@
+/*分类页面样式*/
+.lt-content {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 44px;
+	bottom: 50px;
+	background-color: #f5f5f5;
+}
+.category-left,
+.category-right {
+	position: relative;
+  height: 100%;
+}
+.category-left {
+  width: 80px;
+  float: left;
+}
+.category-left .links-wrapper {
+  background-color: #fff;
+}
+.category-left .links-wrapper  .link{
+	border-right: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+}
+.category-left .links-wrapper  .link a{
+	display: block;
+	line-height: 45px;
+	text-align: center;
+	font-size: 14px;
+}
+.category-left .links-wrapper  .link.active {
+	background-color: #f5f5f5;
+	border-right: 1px solid transparent;
+}
+
+.category-right {
+	margin-left: 90px;
+}
+.category-right .brand-list {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #fff;
+	margin-top: 10px;
+}
+.category-right .brand-list .brand {
+	width: 33.333%;
+	padding: 5px 0;
+}
+.brand-list .brand a {
+	display: block;
+}
+.brand-list .brand img {
+	width: 100%;
+}
+.brand-list .brand p {
+	text-align: center;
+}
+.brand-list .nodata {
+	background-color: #fff;
+	padding: 10px;
+	font-size: 16px;
+}

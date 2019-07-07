@@ -1,6 +1,6 @@
 # 在线商城
 ## 技术栈
-1. 前端使用html,css,js, mui, art-template
+1. 前端使用html,css,js, mui, art-template 地址 http://localhost:3000/m/index.html
 2. 后端使用 nodejs,express,mysql (后端别人做的)
 #完成进度
 1. 2019-7-4 搭建好项目的模板
