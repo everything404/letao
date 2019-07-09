@@ -20,3 +20,9 @@
 .lt-xs-6 .lt-icon-down {
 	font-size: 14px;
 }
+
+#refreshContainer {
+	position: absolute;
+	top: 0;
+	bottom: 50px;
+}

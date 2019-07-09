@@ -9,6 +9,10 @@
 	<link rel="stylesheet" href="css/search-result.css">
 	<link rel="stylesheet" href="assets/fontAwesome/css/font-awesome.min.css">
 	<script src="assets/mui/js/mui.js"></script>
+	<script src="assets/zepto/zepto.min.js"></script>
+	<script src="assets/artTemplate/template-native.js"></script>
+	<script type="text/javascript" src="js/search-result.js"></script>
+  <script src="js/base.js"></script>
 </head>
 <body>
 	<header class="lt-header mui-bar mui-bar-nav">
@@ -27,83 +31,45 @@
 				<span class="mui-icon fa fa-shopping-cart"></span>
 				<span class="mui-tab-label">购物车</span>
 			</a>
-			<a class="mui-tab-item" href="#tabbar-with-map">
+			<a class="mui-tab-item" href="register.html">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">会员中心</span>
 			</a>
 	</nav>
-	<div class="mui-content">
-		<div class="mui-row lt-filter">
-        <div class="mui-col-xs-6 lt-xs-6 lt-left">
-           <span>价格</span>
-           <span class="mui-icon mui-icon-arrowdown lt-icon-down"></span>
-        </div>
-        <div class="mui-col-xs-6 lt-xs-6 lt-right">
-           <span>销量</span>
-           <span class="mui-icon mui-icon-arrowdown lt-icon-down"></span>
-        </div>
-    </div>
-		<div class="products-wrapper">
-		    <ul class="products-content">
-	        <li class="product-item">
-	          <a href="" class="link">
-	            <img src="images/product.jpg" alt="">
-	             <span class="title">
-	            运动男鞋不用钱 男款x112233 行过路过，千万不要错过
-	            </span>
-	            <p class="price-wrapper">
-	              <span class="now-price">￥5600元</span>
-	              <span class="old-price"><del>￥6000元</del></span>
-	            </p>
-	            <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
-	          </a>
-	        </li>
-	        <li class="product-item">
-	          <a href="" class="link">
-	            <img src="images/product.jpg" alt="">
-	             <span class="title">
-	            运动男鞋不用钱 男款x112233 行过路过，千万不要错过
-	            </span>
-	            <p class="price-wrapper">
-	              <span class="now-price">￥560元</span>
-	              <span class="old-price"> <del>￥600元</del></span>
-	            </p> 
-	            <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
-	          </a>
-	        </li>
-	        <li class="product-item">
-	          <a href="" class="link">
-	            <img src="images/product.jpg" alt="">
-	             <span class="title">
-	            运动男鞋不用钱 男款x112233 行过路过，千万不要错过
-	            </span>
-	            <p class="price-wrapper">
-	              <span class="now-price">￥560元</span>
-	              <span class="old-price"> <del>￥600元</del></span>
-	            </p> 
-	            <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
-	          </a>
-	        </li>
-	        <li class="product-item">
-	          <a href="" class="link">
-	            <img src="images/product.jpg" alt="">
-	             <span class="title">
-	            运动男鞋不用钱 男款x112233 行过路过，千万不要错过
-	            </span>
-	            <p class="price-wrapper">
-	              <span class="now-price">￥560元</span>
-	              <span class="old-price"> <del>￥600元</del></span>
-	            </p> 
-	            <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
-	          </a>
-	        </li>
-	      </ul>
+	<div class="mui-content" id="refreshContainer">
+		<div>
+			<div class="mui-row lt-filter">
+	        <div class="mui-col-xs-6 lt-xs-6 lt-left" id="priceSort">
+	           <span>价格</span>
+	           <span class="mui-icon mui-icon-arrowdown lt-icon-down"></span>
+	        </div>
+	        <div class="mui-col-xs-6 lt-xs-6 lt-right" id="numSort">
+	           <span>销量</span>
+	           <span class="mui-icon mui-icon-arrowdown lt-icon-down"></span>
+	        </div>
+	    </div>
+			<div class="products-wrapper">
+			    <ul class="products-content" id="products-content">
+		      </ul>
+		  </div>
 	  </div>
 	</div>
-	<script>
-	 mui('body').on('tap','a',function(){
-     window.top.location.href=this.href;
-   })
+
+	<script id="productlist" type="text/html">
+		<% for(var i = 0; i < data.length; i++) { %>
+    <li class="product-item">
+      <a href="" class="link">
+        <img src="<%= data[i].pic[0].picAddr%>" alt="">
+         <span class="title"><%= data[i].proName %></span>
+        <p class="price-wrapper">
+          <span class="now-price">￥<%= data[i].price %>元</span>
+          <span class="old-price"><del>￥<%= data[i].oldPrice %>元</del></span>
+          <span class="num">库存<%= data[i].num %></span>
+        </p>
+        <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
+      </a>
+	   </li>
+	   <% } %>
 	</script>
 </body>
 </html>
