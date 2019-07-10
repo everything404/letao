@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/register.css">
     <script src="assets/mui/js/mui.js"></script>
     <script src="assets/zepto/zepto.min.js"></script>
+    <script src="js/register.js"></script>
     <script src="js/base.js"></script>
 </head>
 
@@ -40,27 +41,30 @@
        <form class="mui-input-group">
           <div class="mui-input-row">
               <label>用户名</label>
-              <input type="text" class="mui-input-clear" placeholder="请输入用户名">
+              <input type="text" class="mui-input-clear" placeholder="请输入用户名" name="username">
           </div>
+          <div class="register-message">用户名只能是数字，字母，12位</div>
           <div class="mui-input-row">
               <label>手机号码</label>
-              <input type="text" class="mui-input-clear" placeholder="请输入手机号码">
+              <input type="text" class="mui-input-clear" placeholder="请输入手机号码" name="mobile">
           </div>
+          <div class="register-message">请输入国内的11位手机号码</div>
           <div class="mui-input-row">
               <label>密码</label>
-              <input type="password" class="mui-input-password" placeholder="请输入密码">
+              <input type="password" class="mui-input-password" placeholder="请输入密码" name="password">
           </div>
+          <div class="register-message">密码只能是数字，字母的组合，6-12位</div>
           <div class="mui-input-row">
               <label>确认密码</label>
-              <input type="password" class="mui-input-password" placeholder="请确认密码">
+              <input type="password" class="mui-input-password" placeholder="请确认密码" name="againpass">
           </div>
           <div class="mui-input-row">
               <label>认证码</label>
-              <input type="text" class="mui-input-clear" placeholder="请输入认证码">
-              <a href="#" class="mui-pull-right get-code">获取认证码</a>
+              <input type="text" class="mui-input" placeholder="请输入认证码" name="vCode">
+              <a href="javascript:;"  class="mui-pull-right get-code" id="vcode-btn">点击获取验证码</a>
           </div>
           <div class="mui-button-row">
-              <button type="button" class="mui-btn mui-btn-primary lt-btn">确认</button>
+              <button type="button" class="mui-btn mui-btn-primary lt-btn" id="regi-btn">注册</button>
           </div>
       </form>
       <a href="#" class="login-now mui-pull-right">立即登录</a>
