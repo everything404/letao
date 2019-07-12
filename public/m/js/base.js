@@ -5,4 +5,10 @@ $(function() {
 			url: $(this).attr('href')
 		})
 	})
+
+	if($('#back')) {
+		$('#back').on('tap', function() {
+			window.history.back()
+		})
+	}
 })

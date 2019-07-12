@@ -6,10 +6,18 @@
  * 5. 给出提示，告诉用户是否注册成功
  * 6. 跳转到登录页面
  */ 
+// let userinfo = localStorage.getItem('ltuserinfo')
+// if(!userinfo) {
+// 	location.href = 'register.html'
+// 	return
+// } else {
+// 	location.href = 'user.html'
+// }
 $(function() {
 	// 注册验证
 	getRegister()
 	getVcode()
+
 })
 
 /**
@@ -47,8 +55,8 @@ function getVcode() {
 
 
 /**
- * 注册验证
- * @return {[type]} [description]
+ * 获取验证码
+ * @return {[number]} 六位的数字
  */
 function getRegister() {
 		$('#regi-btn').on('tap', function() {
@@ -58,12 +66,12 @@ function getRegister() {
 		let againpass = $('[name="againpass"]').val()
 		let vCode = $('[name="vCode"]').val()
 		let code = $("#vcode-btn").text()
-	  if (!username) {
-			mui.alert('请输入用户名')
+	  if (!username || username.length < 6 || username.length > 12) {
+			mui.alert('请正确输入用户名')
 			return
 	  }
-	  if(!password) {
-			mui.alert('请输入密码')
+	  if(!password || password.length < 6 || password.length > 12) {
+			mui.alert('请正确输入密码')
 			return
 	  }
 	  if(!mobile || mobile.length < 11) {
@@ -86,7 +94,7 @@ function getRegister() {
 	  	mui.alert('验证码不正确')
 	  	return
 	  }
-
+     
 	  $.ajax({
 	  	url: '/user/register',
 	  	type: 'post',

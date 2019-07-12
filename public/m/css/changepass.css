@@ -1,0 +1,16 @@
+/*文字提示信息*/
+.message {
+	padding-left: 15px;
+	font-size: 14px;
+	color: #4CB4E7;
+}
+.lt-btn {
+	width: 90%;
+}
+.get-code {
+	color: #007aff;
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  font-size: 14px;
+}

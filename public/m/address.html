@@ -7,14 +7,17 @@
 	<link rel="stylesheet" href="assets/mui/css/mui.css">
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="assets/fontAwesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/address.css">
 	<script src="assets/mui/js/mui.js"></script>
 	<script src="assets/zepto/zepto.min.js"></script>
+	<script src="assets/artTemplate/template-native.js"></script>
+	<script src="js/address.js"></script>
   <script src="js/base.js"></script>
 </head>
 <body>
 	<header class="lt-header mui-bar mui-bar-nav">
-			<h1 class="mui-title">乐淘</h1>
-			<a href="search.html" class="mui-icon mui-icon-search mui-pull-right"></a>
+			<h1 class="mui-title">收货地址管理</h1>
+			<a href="search.html" class="mui-icon mui-icon-back mui-pull-left" id="back"></a>
 	</header>
   <nav class="mui-bar mui-bar-tab lt-footer">
 			<a class="mui-tab-item" href="index.html">
@@ -29,18 +32,28 @@
 				<span class="mui-icon fa fa-shopping-cart"></span>
 				<span class="mui-tab-label">购物车</span>
 			</a>
-			<a class="mui-tab-item" href="register.html">
+			<a class="mui-tab-item mui-active" href="user.html">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">会员中心</span>
 			</a>
 	</nav>
 	<div class="mui-content">
-	内容区域
+	 <a href="increadderss.html" class="add-address">添加收货地址</a>
+	 <ul class="mui-table-view" id="address-list">
+    
+	 </ul>
 	</div>
-	<script>
-	 mui('body').on('tap','a',function(){
-     window.top.location.href=this.href;
-   })
-	</script>
+<script type="text/html" id="template">
+	<% for(let i = 0; i < result.length; i++) {%>
+	<li class="mui-table-view-cell mui-media">
+        <a href="javascript:;">
+            <div class="mui-media-body">
+            	邮政编码：<%= result[i].postCode %> 收货人： <%= result[i].recipients%>
+                <p class='mui-ellipsis'><%=result[i].address + result[i].addressDetail%></p>
+            </div>
+        </a>
+    </li>
+    <% } %>
+</script>
 </body>
 </html>

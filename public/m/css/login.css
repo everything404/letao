@@ -15,8 +15,8 @@
 	font-size: 14px;
 	margin: 15px 10px 0 0;
 }
-/*文字提示信息*/
-.message {
+
+.register-message {
 	padding-left: 15px;
 	font-size: 14px;
 	color: #4CB4E7;
