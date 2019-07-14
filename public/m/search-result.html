@@ -11,8 +11,8 @@
 	<script src="assets/mui/js/mui.js"></script>
 	<script src="assets/zepto/zepto.min.js"></script>
 	<script src="assets/artTemplate/template-native.js"></script>
-	<script type="text/javascript" src="js/search-result.js"></script>
   <script src="js/base.js"></script>
+	<script type="text/javascript" src="js/search-result.js"></script>
 </head>
 <body>
 	<header class="lt-header mui-bar mui-bar-nav">
@@ -58,7 +58,7 @@
 	<script id="productlist" type="text/html">
 		<% for(var i = 0; i < data.length; i++) { %>
     <li class="product-item">
-      <a href="" class="link">
+      <a href="detail.html?id=<%=data[i].id%>" class="link">
         <img src="<%= data[i].pic[0].picAddr%>" alt="">
          <span class="title"><%= data[i].proName %></span>
         <p class="price-wrapper">
@@ -66,7 +66,7 @@
           <span class="old-price"><del>￥<%= data[i].oldPrice %>元</del></span>
           <span class="num">库存<%= data[i].num %></span>
         </p>
-        <button type="button" class="mui-btn mui-btn-primary lt-button">立即购买</button>
+        <button type="button" class="mui-btn mui-btn-primary lt-button" >立即购买</button>
       </a>
 	   </li>
 	   <% } %>

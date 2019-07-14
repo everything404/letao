@@ -17,7 +17,7 @@
 <body>
 	<header class="lt-header mui-bar mui-bar-nav">
 			<h1 class="mui-title">收货地址管理</h1>
-			<a href="search.html" class="mui-icon mui-icon-back mui-pull-left" id="back"></a>
+			<a href="javascript:;" class="mui-icon mui-icon-back mui-pull-left" id="back"></a>
 	</header>
   <nav class="mui-bar mui-bar-tab lt-footer">
 			<a class="mui-tab-item" href="index.html">
@@ -38,20 +38,21 @@
 			</a>
 	</nav>
 	<div class="mui-content">
-	 <a href="increadderss.html" class="add-address">添加收货地址</a>
-	 <ul class="mui-table-view" id="address-list">
-    
+	 <a href="increadderss.html?isEdit=0" class="add-address">添加收货地址</a>
+	 <ul class="mui-table-view" id="addressList">
 	 </ul>
 	</div>
 <script type="text/html" id="template">
 	<% for(let i = 0; i < result.length; i++) {%>
 	<li class="mui-table-view-cell mui-media">
-        <a href="javascript:;">
-            <div class="mui-media-body">
-            	邮政编码：<%= result[i].postCode %> 收货人： <%= result[i].recipients%>
-                <p class='mui-ellipsis'><%=result[i].address + result[i].addressDetail%></p>
-            </div>
-        </a>
+		<div class="mui-slider-right mui-disabled">
+			<span class="mui-btn mui-btn-blue eidt-btn"  data-id="<%= result[i].id%>">编辑</span>
+			<span class="mui-btn mui-btn-red delete-btn" data-id="<%= result[i].id%>">删除</span>
+		</div>
+    <div class="mui-media-body mui-slider-handle">
+    	邮政编码：<%= result[i].postCode %> 收货人： <%= result[i].recipients%>
+        <p class='mui-ellipsis'><%=result[i].address + result[i].addressDetail%></p>
+    </div>
     </li>
     <% } %>
 </script>
