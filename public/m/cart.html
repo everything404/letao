@@ -17,7 +17,6 @@
 <body>
 	<header class="lt-header mui-bar mui-bar-nav">
 			<h1 class="mui-title">购物车</h1>
-			<a href="search.html" class="mui-icon mui-icon-search mui-pull-right"></a>
 	</header>
   <nav class="mui-bar mui-bar-tab lt-footer">
 			<a class="mui-tab-item" href="index.html">
@@ -37,6 +36,7 @@
 				<span class="mui-tab-label">会员中心</span>
 			</a>
 	</nav>
+	<div class="pay">已选择：3件，共1100元</div>
 	<div class="mui-content" id="goodsContent">
 		<div>
 			<ul class="mui-table-view" id="goodsList">
@@ -47,18 +47,23 @@
 <script type="text/html" id="artTempl">
 	<% for(let i = 0; i < data.length; i++) {%>
   <li class="mui-table-view-cell mui-media">
-		<div class="mui-slider-right mui-disabled">
+ 		<div class="mui-slider-right mui-disabled">
 			<span class="mui-btn mui-btn-blue eidt-btn" data-id="<%= data[i].id %>" data-allSize="<%= data[i].productSize %>">编辑</span>
 			<span class="mui-btn mui-btn-red delete-btn" data-id="<%= data[i].id %>">删除</span>
 		</div>
     <div class="mui-media-body mui-slider-handle lt-address">
-		<img class="mui-media-object mui-pull-left" src="<%= data[i].pic[0].picAddr%>">
-    	<%= data[i].proName%>
-        <p class='mui-ellipsis'>
-        	<span>价格： <%= data[i].price %></span>
-        	<span>数量：<%= data[i].num %></span>
-        	<span >尺寸：<%= data[i].size %></span>
-        </p>
+	    <div class="mui-input-row mui-checkbox mui-left lt-chekcbox">
+			  <input name="checkbox1" value="Item 1" type="checkbox">
+			</div>
+			<div>
+	    	<img class="mui-media-object mui-pull-left" src="<%= data[i].pic[0].picAddr%>">
+	    	<%= data[i].proName%>
+	        <p class='mui-ellipsis'>
+	        	<span>价格： <%= data[i].price %></span>
+	        	<span>数量：<%= data[i].num %></span>
+	        	<span >尺寸：<%= data[i].size %></span>
+	        </p>
+
     </div>
 	</li>
 	<% } %>

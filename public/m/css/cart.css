@@ -3,6 +3,7 @@
 }
 .lt-address {
 	font-size: 16px;
+	display: flex;
 }
 .mui-table-view:after {
 	background-color: transparent;
@@ -35,4 +36,20 @@
 	border: 1px solid #ccc;
 	margin-bottom: 5px;
 	margin-left: 5px;
+}
+.lt-chekcbox {
+	width: 50px;
+	height: 50px;
+}
+.mui-radio.mui-left input[type='radio'], .mui-checkbox.mui-left input[type='checkbox'] {
+	left: 0;
+}
+/*结算样式*/
+.pay {
+	position: fixed;
+	bottom: 50px;
+	left: 0;
+	width: 100%;
+	background: pink;
+	z-index: 999;
 }
