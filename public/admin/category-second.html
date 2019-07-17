@@ -12,6 +12,7 @@
 	<script src="assets/jquery-fileupload/jquery.ui.widget.js"></script>
 	<script src="assets/jquery-fileupload/jquery.iframe-transport.js"></script>
 	<script src="assets/jquery-fileupload/jquery.fileupload.js"></script>
+	<script src="assets/artTemplate/template-native.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/category-second.js"></script>
 </head>
@@ -66,7 +67,7 @@
 	                </div>
 	                <ul class="nav navbar-nav navbar-right">
 	                    <li>
-	                        <a href="javascript:;" class="login_out_bot">
+	                        <a href="javascript:;" class="login_out_bot" id="loginOut">
 	                            <i class="fa fa-sign-out"></i> 退出
 	                        </a>
 	                    </li>
@@ -75,7 +76,7 @@
 	        </div>
 	        <div class="body">
 	        	<button class="operation btn btn-primary" data-toggle="modal" data-target=".category-second">添加分类</button>
-	        	<table class="table table-bordered" id="categoryBox">
+	        	<table class="table table-bordered" id="categoryWrapper">
 	        		
 	        	</table>
 	        	<div class="btn-group page">
@@ -130,15 +131,5 @@
 		</tr>
 		<% } %>
 	</script>
-
-	<script id="firstCategoryTpl" type="text/html">
-		<select class="form-control" id="categoryId">
-			<option value="-1">-- 请选择 --</option>
-			<% for(var i=0;i<data.length;i++){ %>
-				<option value="<%=data[i].id %>"><%=data[i].categoryName %></option>
-			<% } %>
-		</select>
-	</script>
-
 </body>
 </html>

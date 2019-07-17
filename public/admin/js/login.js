@@ -29,17 +29,20 @@ $(function() {
  */
 function loGin() {
 	$('#loginBtn').on('click', function() {
+			$('#title').empty()
+
 		// 属性选择器
 		let username = $.trim($("[name='username']").val()) 
 		let password = $.trim($("[name='password']").val())
 		if(!username) {
 			let html = `<div class="alert alert-warning">请输入用户名</div>`
 			$('#title').append(html)
-
+			return
 		}
 		if(!password) {
 			let html = `<div class="alert alert-warning">请输入密码</div>`
 			$('#title').append(html)
+			return
 		}
 
 		$.ajax({

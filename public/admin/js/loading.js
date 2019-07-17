@@ -8,6 +8,6 @@ $(window).ajaxStart(function(){
     NProgress.start();
 });
 /*在ajax结束请求的时候  把进度条完成*/
-$(window).ajaxStart(function(){
+$(window).ajaxStop(function(){
     NProgress.done();
 });
