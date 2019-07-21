@@ -7,6 +7,9 @@ $(function() {
  prevPageCategory()
  // 添加一级分类
  addFirstCategory()
+ // 编辑分类
+ eidtCategory()
+
 })
 
 // 页码
@@ -15,6 +18,7 @@ let page = 1
 let pageSize = 5
 
 let totalPage = 0
+
 /**
  * 获取一级分类数据
  * 
@@ -111,5 +115,44 @@ function addFirstCategory() {
 				}
 			}
 		})
+	})
+}
+
+/**
+ * 编辑分类
+ */
+function eidtCategory() {
+	let id = 0
+	//获取id，因为编辑按钮是动态生成的，所以要用事件绑定的方式获取其身上的自定属性--data-id ，就是id
+	$('#categoryWrapper').on('click', '.eidtCategory', function() {
+		 id = $(this).attr('data-id')
+     let $brotherText = $(this).parent().prev().text()
+     $('#editDefaultName').val($brotherText)
+     
+	})
+	$('#saveEidt').on('click', function() {
+		let name = $("[name='editCategoryName']").val()
+		let statu = $("[name='statu']").val()
+		if(!name) {
+			let html = `<div class="alert alert-warning"  style="margin-bottom: 0;">请输入分类的名称</div>`
+			$('#Amessage').html(html)
+			return
+		}
+
+		$.ajax({
+			url: '/category/updateTopCategory',
+			type: 'post',
+			data: {
+				id: id,
+				categoryName: name,
+				isDelete: statu
+			},
+			success: function(res) {
+				if(res.success) {
+					location.reload()
+				}
+			}
+		})
+		
 	})
 }

@@ -6,13 +6,6 @@
  * 5. 给出提示，告诉用户是否注册成功
  * 6. 跳转到登录页面
  */ 
-// let userinfo = localStorage.getItem('ltuserinfo')
-// if(!userinfo) {
-// 	location.href = 'register.html'
-// 	return
-// } else {
-// 	location.href = 'user.html'
-// }
 $(function() {
 	// 注册验证
 	getRegister()

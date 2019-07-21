@@ -15,6 +15,11 @@
 	<script src="assets/artTemplate/template-native.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/category-second.js"></script>
+	<style>
+	.alert-warning {
+		margin-bottom: 0;
+	}
+ </style>
 </head>
 <body>
 	<div class="system">
@@ -73,9 +78,12 @@
 	                    </li>
 	                </ul>
 	            </nav>
-	        </div>
+	    </div>
+	     <div class="alert alert-warning fade" id="noData" style="display: none;">
+				  没有更多数据了
+			</div>
 	        <div class="body">
-	        	<button class="operation btn btn-primary" data-toggle="modal" data-target=".category-second">添加分类</button>
+	        	<button class="operation btn btn-primary" data-toggle="modal" data-target=".category-second" id="addCategory">添加分类</button>
 	        	<table class="table table-bordered" id="categoryWrapper">
 	        		
 	        	</table>
@@ -93,21 +101,27 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
 					<h4 class="modal-title" id="myLargeModalLabel">添加分类</h4>
+					<div id="message" class="alert alert-warning" style="display: none;"></div>
 				</div>
 				<div class="modal-body">
-					<div class="form-group" id="firstCategory"></div>
+					<div class="form-group" id="firstCategory">
+						<p>请选择商品分类</p>
+						<select class="form-control" id="categoryFirst" name="categoryId">
+							
+						</select>
+					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="请输入商品名称" id="brandName">
+						<input type="text" class="form-control" placeholder="请输入商品名称" id="brandName" name="brandName">
 					</div>
 				
 					<div class="form-group">
-						<input type="file" class="form-control" id="fileUpload" data-url="/category/addSecondCategoryPic" name="file" accept="image/jpeg">
+						<input type="file" class="form-control" id="fileUpload" data-url="/category/addSecondCategoryPic" name="file" accept="image/jpeg" multiple>
 					</div>
 					<img src="images/brand6.png" class="img-thumbnail" id="showBrand">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" id="addCategory">保存</button>
+					<button type="button" class="btn btn-primary" id="save">保存</button>
 				</div>
 			</div>
 		</div>
@@ -125,11 +139,23 @@
 			<td><%=data.rows[i].id %></td>
 			<td><%=data.rows[i].brandName %></td>
 			<td>
-				<img src="<%=data.rows[i].brandLogo %>">
+				<img src="<%=data.rows[i].brandLogo %>" style="width: 165px; height: 85px;">
 			</td>
 			<td><%=data.rows[i].categoryName %></td>
 		</tr>
 		<% } %>
 	</script>
+	<script id="categoryFirstTpl" type="text/html">
+		<option>没有选择商品分类</option>
+		<% for(let i = 0; i < data.length; i++ ) {%>
+		<option value="<%=data[i].id%>"><%= data[i].categoryName %></option>
+		<% } %>
+	</script>
+
+  <script id="noData" type="text/html">
+		<div class="alert alert-warning">
+				  	<%= message%>
+		</div>
+  </script>
 </body>
 </html>

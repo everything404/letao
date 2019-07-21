@@ -74,8 +74,12 @@
 	            </nav>
 	        </div>
 	        <div class="body">
-	        	<button class="operation btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">添加商品</button>
-	        	<table class="table table-bordered" id="productBox"></table>
+	        	<button class="operation btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" id="addCategory">添加商品</button>
+	        	<!-- 商品类表 -->
+	        	<table class="table table-bordered" id="productWrapper">
+
+	        	</table>
+	        	<!-- 商品类表 end -->
 	        	<div class="btn-group page">
 	        		<div class="btn btn-default" id="prevBtn">上一页</div>
 	        		<div class="btn btn-default" id="nextBtn">下一页</div>
@@ -90,36 +94,56 @@
 	    	<div class="modal-header">
 	    		<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
 	    		<h4 class="modal-title" id="myLargeModalLabel">添加商品</h4>
+	    		<div class="alert alert-warning" id="warnMessage" style="display: none;"></div>
 	    	</div>
 	    	<div class="modal-body">
-	    		<div class="form-group" id="brandBox"></div>
-	    		<div class="form-group">
-	    			<input id="productName" type="text" class="form-control" placeholder="请输入产品名称">
-	    		</div>
-	    		<div class="form-group">
-	    			<input id="productDescription" type="text" class="form-control" placeholder="请输入产品描述">
-	    		</div>
-	    		<div class="form-group">
-	    			<input id="productNum" type="text" class="form-control" placeholder="请输入产品数量">
-	    		</div>
-	    		<div class="form-group">
-	    			<input id="productSize" type="text" class="form-control" placeholder="请输入产品尺码,如29-39">
-	    		</div>
-	    		<div class="form-group">
-	    			<input id="productOriginPrice" type="text" class="form-control" placeholder="请输入商品原价">
-	    		</div>
-	    		<div class="form-group">
-	    			<input id="productNowPrice" type="text" class="form-control" placeholder="请输入商品折扣">
-	    		</div>
-	    		<div class="form-group">
-	    		   <input type="file" accept="image/jpeg" name="pic1" multiple data-url="/product/addProductPic" id="fileUpload">
-	    		   <p class="help-block">最多上传三张图片</p>
-	    		   <div class="row" id="imgBox"></div>
-	    		</div>
+	    		<form method="post">
+		    		<!-- 品牌类表 -->
+		    		<div class="form-group" >
+							<select class="form-control" name="brandId" id="brandWrapper">
+							</select>
+		    		</div>
+		    		<!-- 品牌列表 -->
+		    		<div class="form-group">
+		    			<input id="productName" type="text" class="form-control" placeholder="请输入产品名称" name="productName">
+		    		</div>
+		    		<div class="form-group">
+		    			<input id="productDescription" type="text" class="form-control" placeholder="请输入产品描述" name="description">
+		    		</div>
+		    		<div class="form-group">
+		    			<input id="productNum" type="text" class="form-control" placeholder="请输入产品数量" name="productNum">
+		    		</div>
+		    		<div class="form-group">
+		    			<input id="productSize" type="text" class="form-control" placeholder="请输入产品尺码,如29-39" name="productSize">
+		    		</div>
+		    		<div class="form-group">
+		    			<input id="productPrice" type="text" class="form-control" placeholder="请输入产品价格" name="productPrice">
+		    		</div>
+		    		<div class="form-group">
+		    			<input id="productOriginPrice" type="text" class="form-control" placeholder="请输入产品原价" name="productOriginPrice">
+		    		</div>
+		    		<div class="form-group">
+						最多上传三张图片
+		    		</div>
+		    		<div class="form-group" style="display: flex; justify-content: space-around;">
+		    		   <div class="upload" style="position: relative; min-height: 150px; width: 100%;">
+									<img src="images/none.jpg" style="position: absolute;top: 0; left: 0; width: 95%; height: 100%;" id="img1">
+		    		      <input type="file" accept="image/jpeg" data-url="/product/addProductPic1" id="fileUpload1" name="pic1" style="opacity: 0; position: absolute; top: 0; left: 0;  width: 95%;  height: 100%">
+		    		   </div>
+		    		   <div class="upload" style="position: relative; min-height: 100%; width: 100%;">
+									<img src="images/none.jpg" style="position: absolute;top: 0; left: 0; width: 95%; height: 100%;" id="img2">
+		    		      <input type="file" accept="image/jpeg" data-url="/product/addProductPic2" id="fileUpload2" name="pic2" style="opacity: 0; position: absolute; top: 0; left: 0;  width: 95%; height: 100%">
+		    		   </div>
+		    		   <div class="upload" style="position: relative; min-height: 100%; width: 100%;">
+									<img src="images/none.jpg" style="position: absolute;top: 0; left: 0; width: 95%; height: 100%;" id="img3">
+		    		      <input type="file" accept="image/jpeg" data-url="/product/addProductPic3" id="fileUpload3" name="pic3" style="opacity: 0; position: absolute; top: 0; left: 0;  width: 95%;  height: 100%">
+		    		   </div>
+		    		</div>
+		    		</form>
 	    	</div>
 	    	<div class="modal-footer">
 	    		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	    		<button type="button" class="btn btn-primary" id="addProduct">添加</button>
+	    		<button type="button" class="btn btn-primary" id="save">添加</button>
 	    	</div>
 	    </div>
 	  </div>
@@ -135,38 +159,26 @@
 			<th>是否下架</th>
 			<th>操作</th>
 		</tr>
-		<% for(var i=0;i<data.rows.length;i++){ %>
+		<% for(let i = 0; i < data.length; i ++ ) { %>
 			<tr>
-				<td><%=data.rows[i].id %></td>
-				<td><%=data.rows[i].proName %></td>
-				<td><%=data.rows[i].proDesc %></td>
-				<td><%=data.rows[i].num %></td>
-				<td><%=data.rows[i].size %></td>
-				<td><%=data.rows[i].statu == 1 ? '已上架' : '已下架'  %></td>
+				<td><%=data[i].id %></td>
+				<td><%=data[i].proName %></td>
+				<td><%=data[i].proDesc %></td>
+				<td><%=data[i].num %></td>
+				<td><%=data[i].size %></td>
+				<td><%=data[i].statu == 1 ? '上架商品' : '下架商品'  %></td>
 				<td>
-					<button type="button" class="btn btn-danger">下架</button>
+					<button type="button" class="btn <%=data[i].statu ? 'btn-danger' : 'btn-success'%>"><%= data[i].statu == 1 ? '下架' : '上架' %></button>
 				</td>
 			</tr>
 		<% } %>
 	</script>
 
 	<script id="brandTpl" type="text/html">
-		<select class="form-control" id="brandOptions">
 			<option value="-1">-- 请选择品牌 --</option>
-			<% for(var i=0;i<data.rows.length;i++){ %>
-				<option value="<%=data.rows[i].categoryId %>"><%=data.rows[i].brandName %></option>
+		  <% for(let i = 0; i < data.length; i++) {%>
+				<option value="<%=data[i].categoryId %>"><%=data[i].brandName %></option>
 			<% } %>
-		</select>
-	</script>
-
-	<script id="imgsTpl" type="text/html">
-		<% for(var i=0;i<data.length;i++){ %>
-		<div class="col-xs-6 col-md-3">
-			<div  class="thumbnail">
-				<img src="<%=data[i].picAddr %>">
-			</div>
-		</div>
-		<% } %>
 	</script>
 </body>
 </html>

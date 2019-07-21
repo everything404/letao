@@ -37,8 +37,6 @@ Product.queryProductDetailList= function (product, page, callback) {
   selectSql = selectSql + " LIMIT ?,?";
   param[param.length] = (page.page - 1) * page.size;
   param[param.length] = page.size;
-  console.log(selectSql);
-  console.log(param);
   db.query(selectSql, param, function (err, result) {
     if (err) {
       return callback(err);
@@ -79,8 +77,6 @@ Product.queryProduct = function (product, page, callback) {
 	selectSql = selectSql + " LIMIT ?,?";
 	param[param.length]=(page.page-1)*page.size;
 	param[param.length]=page.size;
-	console.log(selectSql);
-	console.log(param);
 	db.query(selectSql, param, function (err, result) {
 		if (err) {
 			return callback(err);
@@ -113,7 +109,6 @@ Product.addProduct = function (product, callback) {
   var selectSql = 'insert into product (id,proName,oldPrice,price,proDesc,size,statu,updateTime,num,brandId)  values (null,?,?,?,?,?,?,?,?,?)';
   db.query(selectSql, [product.proName, product.oldPrice, product.price, product.proDesc, product.size, product.statu, product.updateTime, product.num, product.brandId], function (err, result) {
     if (err) {
-      console.log(err);
       return callback(err);
     }
     callback(err, result);

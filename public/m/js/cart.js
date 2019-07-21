@@ -5,12 +5,21 @@
 $.ajax({
 	url: '/user/queryUserMessage',
 	type: 'get',
-	// 将异步改为同步
 	async: false,
 	success: function(res) {
 		if(res.error && res.error === 400) {
-			location.href = 'login.html'
-		}
+			mui.alert('未登录', function() {
+				location.href = 'login.html'
+				return
+			})
+		} else if(!res.isDelete) {
+				mui.alert('账号有问题，请联系客服', function() {
+					location.href = 'login.html'
+					return
+				})
+	    } else {
+	    	flag = true
+	    }
 	}
 })
 // 页码数
@@ -21,7 +30,7 @@ let that = null
 let html = ''
 
 $(function() {
-	// 初始化上拉加载更多--同时第一次获取购物车数据
+ 		// 初始化上拉加载更多--同时第一次获取购物车数据
 	initPullRefresh()
 	// 编辑商品
 	editGoods()
@@ -49,28 +58,29 @@ function initPullRefresh() {
 
 // 初始化上拉加载更多是，获取购物车数据
 function getData() {
+
 	if(!that) {
 		that = this
 	}
-	$.ajax({
-		url: '/cart/queryCartPaging',
-		type: 'get',
-		data: {
-			page: page++,
-			pageSize: 7
-		},
-		success: function(res) {
-			if(res.data && res.data.length > 0) {
-				html += template('artTempl', {
-					data: res.data
-				})
-				$('#goodsList').html(html)
-				that.endPullupToRefresh(false)
-			} else {
-				that.endPullupToRefresh(true)
+		$.ajax({
+			url: '/cart/queryCartPaging',
+			type: 'get',
+			data: {
+				page: page++,
+				pageSize: 7
+			},
+			success: function(res) {
+				if(res.data && res.data.length > 0) {
+					html += template('artTempl', {
+						data: res.data
+					})
+					$('#goodsList').html(html)
+					that.endPullupToRefresh(false)
+				} else {
+					that.endPullupToRefresh(true)
+				}
 			}
-		}
-	})
+		})
 }
 
 // 编辑商品

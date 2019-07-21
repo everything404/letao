@@ -1,206 +1,187 @@
 $(function(){
 
-	var page = 1;
-	var pagesize = 10;
-	var totalPage = 0;
-		
-	GetProduct();
+	// 获取产品列表
+	getProductList()
+  // 添加商品
+  addCategory()
+  // 下一页
+  nextPage()
+  // 上一页
+  prevPage()
+ 
 
-	function GetProduct(){
+})
 
-		$.ajax({
-			type:'get',
-			url:'/product/queryProductDetailList',
-			data:{
-				page:page,
-				pageSize:pagesize
-			},
-			success:function(result){
+// 页数
+let page = 1
 
-				totalPage = Math.ceil(result.total/pagesize);
+// 每页的条数
+let pageSize = 3
 
-				$('#productBox').html(template('productTpl',{data:result}));
+// 总页数
+totalPage = 0
 
-			}
-		});
+// 图片数组
+let imgArr = []
 
-	}
-
-
-	$('#prevBtn').on('click',function(){
-
-		page--;
-
-		if(page < 1){
-
-			page = 1;
-
-			alert('已经是第一页了');
-
-			return;
-
-		}
-
-		GetProduct();
-
-	});
-
-
-	$('#nextBtn').on('click',function(){
-
-		page++;
-
-		if(page > totalPage){
-
-			page = totalPage;
-
-			alert('已经是最后一页了');
-
-			return;
-
-		}
-
-		GetProduct();
-
-	});
-
+/**
+ * 获取产品列表
+ */
+function getProductList() {
 	$.ajax({
-		url:'/category/querySecondCategoryPaging',
-		type:'get',
-		data:{
-			page:1,
-			pageSize:100
+		url: '/product/queryProductDetailList',
+		type: 'get',
+		data: {
+			page: page,
+			pageSize: pageSize
 		},
-		success:function(result){
-
-			$('#brandBox').html(template('brandTpl',{data:result}));
-
-			console.log(result);
-
+		success: function(res) {
+			totalPage = Math.ceil(res.total / pageSize)
+			let html = template('productTpl', {
+				data: res.rows
+			})
+			$('#productWrapper').html(html)
 		}
-
-	});
-
-	var pic = [];
-
-	$('#fileUpload').fileupload({
-	    dataType: 'json',
-	    done: function (e, data) {
-
-	    	pic.push(data._response.result);
-
-	    	$('#imgBox').html(template('imgsTpl',{data:pic}))
-
-	    }
-	});
-
-
-	$('#addProduct').on('click',function(){
-
-		var brandOptions = $('#brandOptions').val();
-		var productName = $("#productName").val();
-		var productDescription = $("#productDescription").val();
-		var productNum = $("#productNum").val();
-		var productSize = $("#productSize").val();
-		var productOriginPrice = $("#productOriginPrice").val();
-		var productNowPrice = $("#productNowPrice").val();
-
-
-		if(brandOptions == -1){
-
-			alert('请选择品牌');
-
-			return;
-
+	})
+}
+/**
+ * 获取下一页商品数据
+ */
+function nextPage() {
+	$('#nextBtn').on('click', function() {
+		console.log(totalPage)
+		if(page >= totalPage) {
+			page = totalPage
+		} else {
+			page++
+			getProductList()
 		}
+	})
+}
 
-		if(!productName){
-
-			alert('请输入产品名称');
-
-			return;
-
+function prevPage() {
+	$('#prevBtn').on('click', function() {
+		if(page <= 1) {
+				page = 1
+				return
 		}
+		page--
+		getProductList()
+	})
+}
 
-		if(!productDescription){
+/**
+ * 添加商品
+ * 1. 获取添加分类按钮，并添加点击事件
+ * 2. 调用二级分类接口，分类的名称，并渲染到页面上
+ * 3. 获取用户输入的信息，并校验
+ * 4. 调用添加商品接口，实现功能
+ * 5. 刷新页面
+ */
+function addCategory() {
 
-			alert('请输入产品描述');
-
-			return;
-
-		}
-
-		if(!productNum){
-
-			alert('请输入产品数量');
-
-			return;
-
-		}
-
-		if(!productSize){
-
-			alert('请输入产品尺寸');
-
-			return;
-
-		}
-
-		if(!productOriginPrice){
-
-			alert('请输入产品原价格');
-
-			return;
-
-		}
-
-		if(!productNowPrice){
-
-			alert('请输入产品折扣价');
-
-			return;
-
-		}
-
-		if(pic.length == 0){
-
-			alert('请上传产品图片');
-
-			return;
-
-		}
-
+	$('#addCategory').on('click', function() {
 		$.ajax({
-			type:'post',
-			url:'/product/addProduct',
-			data:{
-				proName:productName,
-				oldPrice:productOriginPrice,
-				price:productNowPrice,
-				proDesc:productDescription,
-				size:productSize,
-				statu:1,
-				num:productNum,
-				brandId:brandOptions,
-				pic:pic
+			url: '/category/querySecondCategoryPaging',
+			data: {
+				page: 1,
+				pageSize: 100
 			},
-			success:function(result){
-				
-				if(result.success){
-
-					location.reload();
-
-				}else{
-
-					alert('商品添加失败');
-
-				}
-
+			success: function(res) {
+				let html = template('brandTpl', {
+					data: res.rows
+				})
+				$('#brandWrapper').html(html)
 			}
 		})
+	})
+
+	$('#save').on('click', function() {
+		$('#warnMessage').css('display', 'none')
+		let proName = $.trim($("[name='productName']").val())
+		let oldPrice = $.trim($("[name='productOriginPrice']").val())
+		let price = $.trim($("[name='productPrice']").val())
+		let proDesc = $.trim($("[name='description']").val())
+		let size = $.trim($("[name='productSize']").val())
+		let num = $.trim($("[name='productNum']").val())
+		let brandId = $.trim($("[name='brandId']").val())
 
 
-	});
+		if(!proName) {
+			$('#warnMessage').css('display', 'block').text('请输入产品名称')
+			return
+		}
+		if(!proDesc) {
+			$('#warnMessage').css('display', 'block').text('请输入产品描述')
+			return
+		}
+		if(!num) {
+			$('#warnMessage').css('display', 'block').text('请输入产品数量')
+			return
+		}
+		if(!size) {
+			$('#warnMessage').css('display', 'block').text('请输入产品尺寸')
+			return
+		}
+		if(!price) {
+			$('#warnMessage').css('display', 'block').text('请输入产品价格')
+			return
+		}
+		if(!oldPrice) {
+			$('#warnMessage').css('display', 'block').text('请输入产品原价')
+			return
+		}
+		if(!brandId) {
+			$('#warnMessage').css('display', 'block').text('请输入选择品牌')
+			return
+		}
+
+		$.ajax({
+			url: '/product/addProduct',
+			type: 'post',
+			data: {
+				proName: proName,
+				oldPrice: oldPrice,
+				price: price,
+				proDesc: proDesc,
+				size: size,
+				num: num,
+				brandId: brandId,
+				statu: 1,
+				pic: JSON.stringify(imgArr)
+			},
+			success: function(res) {
+				if(res.success) {
+					location.reload()
+				}
+			}
+		})
+    
+		
+	})
 
 
-});
+
+	 // 图片上传
+  imgUpload('#fileUpload1', '#img1')
+  imgUpload('#fileUpload2', '#img2')
+  imgUpload('#fileUpload3', '#img3')
+
+	
+
+
+}
+/**
+ * 图片上传
+ * @param  String id input标签的id
+ */
+function imgUpload(id, imgId) {
+	$(id).fileupload({
+		dataType: 'json',
+		done: function (e, data) {
+			// console.log(JSON.stringify(data.result))
+			imgArr.push(data.result)
+			$(imgId).attr('src', data.result.picAddr)
+    }
+  })
+}

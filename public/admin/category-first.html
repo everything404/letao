@@ -76,7 +76,7 @@
 	        <div class="body">
 	        	<div class="alert alert-warning" role="alert" style="display: none;" id="message">没有更多数据了</div>
 	        	<button class="operation btn btn-primary" data-toggle="modal" data-target=".category-first">添加分类</button>
-	        	<table class="table table-bordered" id="categoryWrapper">
+	        	 <table class="table table-bordered" id="categoryWrapper">
 	        		
 	        	</table>
 				<div class="btn-group page">
@@ -86,7 +86,7 @@
 	        </div>
 		</div>
 	</div>
-
+	<!-- 添加 -->
 	<div class="modal fade category-first">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -107,17 +107,53 @@
 			</div>
 		</div>
 	</div>
+	<!-- 添加 end -->
+	<!-- 编辑 -->
+	<div class="modal fade category-edit">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+					<h4 class="modal-title">编辑分类</h4>
+					<div id="Amessage"></div>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="请输入分类的名称" name="editCategoryName" id="editDefaultName">
+					</div>
+				<div class="form-group">
+					<p>请选择商品状态</p>
+				   <select name="statu" id="statu">
+					  <option value="1">上架</option>
+					  <option value="0">下架</option>
+					</select>
+				</div>
+			</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="saveEidt">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 编辑 end-->
 
-	
+
 	<script id="categoryTpl" type="text/html">
 		<tr>
 			<th>分类的编号</th>
 			<th>分类名称</th>
+			<th>编辑</th>
 		</tr>
 		<% for(var i=0;i<data.length;i++){ %>
 			<tr>
 				<td><%=data[i].id %></td>
 				<td><%=data[i].categoryName %></td>
+				<td>
+					<button class="btn btn btn-primary eidtCategory" data-toggle="modal" data-target=".category-edit" data-id="<%=data[i].id %>">编辑</button>
+					<button class="btn<%=data[i].isDelete?' btn-danger':' btn-success' %>"><%= data[i].isDelete ? '下架': '上架' %></button>
+					
+				</td>
 			</tr>
 		<% } %>
 	</script>

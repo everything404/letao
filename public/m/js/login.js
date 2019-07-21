@@ -22,7 +22,7 @@ function loGin() {
 		let vCode = $.trim($('[name="vCode"]').val())
 		let code = $.trim( $('#vcode-btn').text())
 		
-		if (!username || username.length < 6 || username.length > 12) {
+		if (!username || username.length < 3 || username.length > 12) {
 			mui.alert('请正确输入用户名')
 			return
 	  }
@@ -62,9 +62,25 @@ function loGin() {
     			mui.alert('密码或用户名错误')
     			return
     		}
-    		mui.alert('登录成功', function() {
+    		mui.alert('登录中', function() {
 	    		$('#login-btn').text('登录')
-    			location.href = 'user.html'
+	    		$.ajax({
+							url: '/user/queryUserMessage',
+							type: 'get',
+							success: function(res) {
+								if(res.error && res.error === 400) {
+									mui.alert('未登录', function() {
+										location.href = 'login.html'
+									})
+								} else if(res.isDelete && !res.isDelete) {
+									mui.alert('账号有问题，请联系客服', function() {
+										location.href = 'login.html'
+									})
+						    } else {
+						    		location.href = 'user.html'
+						    }
+							}
+						})
     		})
     	}
     })

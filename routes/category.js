@@ -51,6 +51,8 @@ router.post("/addTopCategory", function (req, res) {
 });
 router.post("/updateTopCategory", checkRootLogin);
 router.post("/updateTopCategory", function (req, res) {
+    console.log('--==--==-=-=-=')
+    console.log(req.body)
     var category = new Category({
         id: req.body.id ? req.body.id : '',
         categoryName: req.body.categoryName ? req.body.categoryName : '',
@@ -92,7 +94,8 @@ router.post("/addSecondCategoryPic", function (req, res) {
     form.maxFieldsSize = 2 * 1024 * 1024;
     //form.maxFields = 1000;  设置所以文件的大小总和
     form.parse(req, function (err, fields, files) {
-        var file = files.pic1;
+
+        var file = files.file;
         let picName = uuid.v1() + path.extname(file.name);
         fs.rename(file.path, 'public\\upload\\brand\\' + picName, function (err) {
             if (err) return res.send({ "error": 403, "message": "图片保存异常！" });

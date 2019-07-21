@@ -100,8 +100,8 @@ router.get("/queryProductDetailList", function (req, res) {
         })
     })
 });
-router.post("/addProductPic", function (req, res) {
-    console.log('===============');
+router.post("/addProductPic1", checkRootLogin)
+router.post("/addProductPic1", function (req, res) {
     //创建表单上传
     var form = new formidable.IncomingForm();
     //设置编辑
@@ -114,21 +114,68 @@ router.post("/addProductPic", function (req, res) {
     form.maxFieldsSize = 2 * 1024 * 1024;
     //form.maxFields = 1000;  设置所以文件的大小总和
     form.parse(req, function (err, fields, files) {
-        for (let i = 1; i < 4; i++) {
-            var file = files['pic' + i];
-            if (!file || file.name == "") break;
+            var file = files.pic1;
+            if (!file || file.name == "") return
             let picName = uuid.v1() + path.extname(file.name);
             fs.rename(file.path, 'public\\upload\\product\\' + picName, function (err) {
-                if (err) res.send({"error": 403, "message": "图片保存异常！"});
+                if (err) return res.send({"error": 403, "message": "图片保存异常！"});
                 res.send({"picName": picName, "picAddr": '/upload/product/' + picName});
-
             })
-        }
+            return // 阻止上传多张图片的时候，后台提示 Cannot set headers after they are sent to the client
+    });
+});
+router.post("/addProductPic2", checkRootLogin)
+router.post("/addProductPic2", function (req, res) {
+    //创建表单上传
+    var form = new formidable.IncomingForm();
+    //设置编辑
+    form.encoding = 'utf-8';
+    //设置文件存储路径
+    form.uploadDir = "public/upload/product";
+    //保留后缀
+    form.keepExtensions = true;
+    //设置单文件大小限制 2m
+    form.maxFieldsSize = 2 * 1024 * 1024;
+    //form.maxFields = 1000;  设置所以文件的大小总和
+    form.parse(req, function (err, fields, files) {
+            var file = files.pic2;
+            if (!file || file.name == "") return
+            let picName = uuid.v1() + path.extname(file.name);
+            fs.rename(file.path, 'public\\upload\\product\\' + picName, function (err) {
+                if (err) return res.send({"error": 403, "message": "图片保存异常！"});
+                res.send({"picName": picName, "picAddr": '/upload/product/' + picName});
+            })
+            return // 阻止上传多张图片的时候，后台提示 Cannot set headers after they are sent to the client
+    });
+});
+router.post("/addProductPic3", checkRootLogin)
+router.post("/addProductPic3", function (req, res) {
+    //创建表单上传
+    var form = new formidable.IncomingForm();
+    //设置编辑
+    form.encoding = 'utf-8';
+    //设置文件存储路径
+    form.uploadDir = "public/upload/product";
+    //保留后缀
+    form.keepExtensions = true;
+    //设置单文件大小限制 2m
+    form.maxFieldsSize = 2 * 1024 * 1024;
+    //form.maxFields = 1000;  设置所以文件的大小总和
+    form.parse(req, function (err, fields, files) {
+            var file = files.pic3;
+            if (!file || file.name == "") return
+            let picName = uuid.v1() + path.extname(file.name);
+            fs.rename(file.path, 'public\\upload\\product\\' + picName, function (err) {
+                if (err) return res.send({"error": 403, "message": "图片保存异常！"});
+                res.send({"picName": picName, "picAddr": '/upload/product/' + picName});
+            })
+            return // 阻止上传多张图片的时候，后台提示 Cannot set headers after they are sent to the client
     });
 });
 router.post("/addProduct", checkRootLogin);
 
-var addPic = function (picName, picAddr, id) {
+        
+var addPic = function (picName, id, picAddr) {
     ProPic.addPic({
         picName: picName,
         productId: id,
@@ -152,16 +199,16 @@ router.post("/addProduct", function (req, res) {
     })
     Product.addProduct(product, function (err, data) {
         if (err) return res.send({"error": 403, "message": "数据库异常！"});
+        
+        let pic = JSON.parse(req.body.pic)
 
-        if (req.body.picName1 && req.body.picAddr1) {
-            addPic(req.body.picName1, req.body.picAddr1, data.insertId);
+        for(let i = 0; i < pic.length; i++) {
+          if (pic[i].picName && pic[i].picAddr) {
+            addPic(pic[i].picName,data.insertId, pic[i].picAddr);
+           } 
         }
-        if (req.body.picName2 && req.body.picAddr2) {
-            addPic(req.body.picName2, req.body.picAddr2, data.insertId);
-        }
-        if (req.body.picName3 && req.body.picAddr3) {
-            addPic(req.body.picName3, req.body.picAddr3, data.insertId);
-        }
+
+       
         res.send({"success": true});
     })
 

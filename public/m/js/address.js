@@ -1,14 +1,4 @@
-$.ajax({
-	url: '/user/queryUserMessage',
-	type: 'get',
-	// 将异步改为同步
-	async: false,
-	success: function(res) {
-		if(res.error && res.error === 400) {
-			location.href = 'login.html'
-		} 
-	}
-})
+
 $(function() {
 	// 获取收货地址列表
   getAddress()

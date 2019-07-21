@@ -21,7 +21,7 @@ function getGoodsInfo() {
 			id: id
 		},
 		success: function(res) {
-		  let html =	template('detailTemp', res)
+		  let html =	template('detailTemp', res || [])
 		  $('#contentWrapper').html(html)
 		 mui('.mui-numbox').numbox()
 		  //获得slider插件对象 -- 因为动态生成的轮播图，所以要重新初始化
