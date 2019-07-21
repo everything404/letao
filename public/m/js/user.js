@@ -7,21 +7,20 @@ let userinfo = null
 $.ajax({
   url: '/user/queryUserMessage',
   type: 'get',
-  async: false,
   success: function(res) {
     if(res.error && res.error === 400) {
       mui.alert('未登录', function() {
         location.href = 'login.html'
         return
       })
-    }  
-    if(res.isDelete && !res.isDelete) {
+    } 
+    if(!res.isDelete) {
         mui.alert('账号有问题，请联系客服', function() {
           location.href = 'login.html'
           return
         })
       }
-      userinfo = res
+    userinfo = res
   }
 })
 $(function() {
@@ -45,7 +44,7 @@ $(function() {
   })
 
   let html = template('ltuserinfo', {
-    userinfo: userinfo
+    userinfo: userinfo || {}
   })
   $('#userinfo-list').prepend(html)
 })

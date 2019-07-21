@@ -10,7 +10,7 @@ $.ajax({
         return
       })
     }  
-    if(res.isDelete && !res.isDelete) {
+    if(!res.isDelete) {
         mui.alert('账号有问题，请联系客服', function() {
           location.href = 'login.html'
           return

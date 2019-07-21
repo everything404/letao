@@ -12,13 +12,12 @@ $.ajax({
 				location.href = 'login.html'
 				return
 			})
-		} else if(!res.isDelete) {
+		} 
+		if(!res.isDelete) {
 				mui.alert('账号有问题，请联系客服', function() {
 					location.href = 'login.html'
 					return
 				})
-	    } else {
-	    	flag = true
 	    }
 	}
 })
@@ -72,7 +71,7 @@ function getData() {
 			success: function(res) {
 				if(res.data && res.data.length > 0) {
 					html += template('artTempl', {
-						data: res.data
+						data: res.data || []
 					})
 					$('#goodsList').html(html)
 					that.endPullupToRefresh(false)
